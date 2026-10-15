@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Unit Converter</title>
+<style>
+body{
+ text-align:center;
+ font-family: Arial;
+ background: #f2f2f2;
+}
+.box{
+ background: white;
+ width: 300px;
+ margin: 50px auto;
+ padding: 20px;
+ border-radius: 10px;
+ border: 1px solid black;
+}
+input, select{
+ width: 90%;
+ padding: 8px;
+ margin: 10px;
+}
+#output{
+ font-weight: bold;
+ margin-top: 15px;
+ font-size: 20px;
+}
+</style>
+</head>
+<body>
+
+<h2>Unit Converter</h2>
+
+<div class="box">
+ <input type="number" id="value" placeholder="Enter Number" oninput="convert()">
+
+ <select id="from" onchange="convert()">
+  <option value="meter">Meter</option>
+  <option value="feet">Feet</option>
+  <option value="kg">Kg</option>
+  <option value="pound">Pound</option>
+ </select>
+
+ <p>To</p>
+
+ <select id="to" onchange="convert()">
+  <option value="feet">Feet</option>
+  <option value="meter">Meter</option>
+  <option value="pound">Pound</option>
+  <option value="kg">Kg</option>
+ </select>
+
+ <div id="output">Result: </div>
+</div>
+
+<script>
+function convert(){
+ let val = document.getElementById("value").value;
+ let from = document.getElementById("from").value;
+ let to = document.getElementById("to").value;
+ let result = 0;
+
+ if(from == "meter" && to == "feet"){
+   result = val * 3.28084;
+ }
+ else if(from == "feet" && to == "meter"){
+   result = val / 3.28084;
+ }
+ else if(from == "kg" && to == "pound"){
+   result = val * 2.20462;
+ }
+ else if(from == "pound" && to == "kg"){
+   result = val / 2.20462;
+ }
+ else if(from == to){
+   result = val;
+ }
+ else{
+   result = "Invalid";
+ }
+
+ if(result != "Invalid"){
+   document.getElementById("output").innerHTML = "Result: " + Number(result).toFixed(2);
+ } else {
+   document.getElementById("output").innerHTML = "Cannot convert";
+ }
+}
+</script>
+
+</body>
+</html>
